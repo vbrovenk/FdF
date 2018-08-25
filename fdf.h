@@ -15,15 +15,22 @@
 
 # include "libft.h"
 # include <fcntl.h>
-#include <stdio.h>
 # include "get_next_line.h"
 # include "mlx.h"
+
+# define WIDTH 720
+# define HEIGHT 480
+# define UP_ARROW 126
+# define DOWN_ARROW 125
+# define LEFT_ARROW 123
+# define RIGHT_ARROW 124
 
 typedef	struct s_vec
 {
 	int		x;
 	int		y;
 	int		z;
+	int		color;
 }				t_vec;
 
 typedef	struct	s_fdf
@@ -33,6 +40,8 @@ typedef	struct	s_fdf
 	t_vec	**map_vec;
 	int		rows;
 	int		columns;
+	int		translation_x;
+	int		translation_y;
 }				t_fdf;
 
 #endif
