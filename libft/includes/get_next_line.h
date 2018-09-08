@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # include "libft.h"
-# define BUFF_SIZE 1
+# define BUFF_SIZE 1000
 
 typedef	struct	s_gnl
 {

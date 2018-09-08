@@ -15,7 +15,9 @@ INCLUDE = fdf.h
 LIBFT_INC = ./libft/includes/
 LIBFT = libft/libft.a
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
-SRC = main.c
+SRC =	main.c\
+		rotatin.c\
+		bresenham.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
@@ -31,13 +33,15 @@ PURPLEBOLD=\033[1;35m
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@make -C libft/
+$(NAME): $(OBJ) $(LIBFT)
 	@gcc $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(PURPLEBOLD)FDF is ready"
 
 %.o: %.c $(INCLUDE)
 	@gcc -c $< -o $@ -I $(LIBFT_INC)
+
+$(LIBFT):
+	@make -C libft/
 
 clean:
 	@make clean -C libft/
