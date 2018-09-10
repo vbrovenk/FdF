@@ -17,7 +17,9 @@ LIBFT = libft/libft.a
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 SRC =	main.c\
 		rotatin.c\
-		bresenham.c
+		bresenham.c\
+		parsing.c\
+		filling_map.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 

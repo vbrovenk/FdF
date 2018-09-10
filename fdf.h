@@ -51,12 +51,22 @@ typedef	struct	s_fdf
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*img_ptr;
+
+	int		*image;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
 
 	t_vec	**map_vec;
 	t_vec	**change_map;
 
 	int		width_map;
 	int		height_map;
+
+	// variables for coord dots
+	int		start_width;
+	int		start_height;
 
 	int		rows;
 	int		columns;
@@ -70,6 +80,15 @@ typedef	struct	s_fdf
 	float	scale;
 }				t_fdf;
 
+typedef	struct	s_bresenham
+{
+	int		dx;
+	int		dy;
+	float	lengthX;
+	float	lengthY;
+	int		length;
+}				t_bresenham;
+
 typedef struct s_m3x3
 {
 	float	m[3][3];
@@ -78,7 +97,11 @@ typedef struct s_m3x3
 t_vec	rot_x(t_fdf *fdf, t_vec point);
 t_vec	rot_y(t_fdf *fdf, t_vec point);
 t_vec	rot_z(t_fdf *fdf, t_vec point);
-t_vec   scale(t_fdf *fdf, t_vec point);
-void    draw_line(t_fdf *fdf, t_vec p1, t_vec p2);
+t_vec	scale(t_fdf *fdf, t_vec point);
+void	draw_line(t_fdf *fdf, t_vec p1, t_vec p2);
+int		parse_map(t_fdf *fdf, const char *file_name);
+void	clear_split(char **split);
+void	create_map_vectors(t_fdf *fdf);
+void	fill_map_vectors(t_fdf *fdf, const char *file_name);
 
 #endif
