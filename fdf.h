@@ -19,8 +19,13 @@
 # include "get_next_line.h"
 # include "mlx.h"
 
-# define WIDTH 720
-# define HEIGHT 480
+// # define WIDTH 720
+// # define HEIGHT 480
+
+
+# define WIDTH 1280
+# define HEIGHT 720
+
 # define UP_ARROW 126
 # define DOWN_ARROW 125
 # define LEFT_ARROW 123
@@ -45,6 +50,7 @@ typedef	struct s_vec
 	float	y;
 	float	z;
 	int		color;
+	int		depth;
 }				t_vec;
 
 typedef	struct	s_fdf
@@ -73,7 +79,7 @@ typedef	struct	s_fdf
 
 	int		translation_x;
 	int		translation_y;
-	int		translation_z;
+	float	translation_z;
 	float	angle_x;
 	float	angle_y;
 	float	angle_z;
@@ -94,6 +100,14 @@ typedef struct s_m3x3
 	float	m[3][3];
 }				t_m3x3;
 
+typedef	struct	s_gradient
+{
+	int		alpha;
+	int		red;
+	int		green;
+	int		blue;
+}				t_gradient;
+
 t_vec	rot_x(t_fdf *fdf, t_vec point);
 t_vec	rot_y(t_fdf *fdf, t_vec point);
 t_vec	rot_z(t_fdf *fdf, t_vec point);
@@ -103,5 +117,8 @@ int		parse_map(t_fdf *fdf, const char *file_name);
 void	clear_split(char **split);
 void	create_map_vectors(t_fdf *fdf);
 void	fill_map_vectors(t_fdf *fdf, const char *file_name);
+void	draw_lines(t_fdf *fdf);
+int		choose_key(int key, void *param);
+int		x_exit(void *param);
 
 #endif

@@ -12,6 +12,25 @@
 
 #include "fdf.h"
 
+void			fill_change_vectors(t_fdf *fdf)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < fdf->rows)
+	{
+		j = -1;
+		while (++j < fdf->columns)
+		{
+			fdf->change_map[i][j].x = fdf->map_vec[i][j].x;
+			fdf->change_map[i][j].y = fdf->map_vec[i][j].y;
+			fdf->change_map[i][j].z = fdf->map_vec[i][j].z;
+			fdf->change_map[i][j].color = fdf->map_vec[i][j].color;
+		}
+	}
+}
+
 void			create_map_vectors(t_fdf *fdf)
 {
 	int	i;
@@ -25,6 +44,8 @@ void			create_map_vectors(t_fdf *fdf)
 		fdf->change_map[i] = (t_vec*)malloc(sizeof(t_vec) * fdf->columns);
 		i++;
 	}
+	fdf->width_map = (fdf->columns - 1) * BETWEEN_VERTEX / 2;
+	fdf->height_map = (fdf->rows - 1) * BETWEEN_VERTEX / 2;
 	if (fdf->rows * BETWEEN_VERTEX < HEIGHT)
 		fdf->scale = 1;
 	else
@@ -55,6 +76,12 @@ static	void	set_coordinates(t_fdf *fdf, char **split, int i, int j)
 	fdf->map_vec[i][j].x = fdf->start_width;
 	fdf->map_vec[i][j].y = fdf->start_height;
 	fdf->map_vec[i][j].z = ft_atoi(split[j]) * BETWEEN_VERTEX;
+	if (fdf->map_vec[i][j].z > 0)
+	{
+		fdf->map_vec[i][j].depth = 1;
+	}
+	else
+		fdf->map_vec[i][j].depth = 0;
 	if (ft_strchr(split[j], ','))
 		fdf->map_vec[i][j].color = set_color(split[j]);
 	else if (fdf->map_vec[i][j].z > 0)
@@ -89,4 +116,5 @@ void			fill_map_vectors(t_fdf *fdf, const char *file_name)
 		ft_strdel(&line);
 		i++;
 	}
+	fill_change_vectors(fdf);
 }

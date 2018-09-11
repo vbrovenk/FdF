@@ -19,7 +19,8 @@ SRC =	main.c\
 		rotatin.c\
 		bresenham.c\
 		parsing.c\
-		filling_map.c
+		filling_map.c\
+		choose_key.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 

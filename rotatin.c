@@ -40,6 +40,7 @@ t_vec			rot_x(t_fdf *fdf, t_vec point)
 	rotation.m[2][0] = 0;
 	rotation.m[2][1] = sin(fdf->angle_x);
 	rotation.m[2][2] = cos(fdf->angle_x);
+	point.z *= fdf->translation_z;
 	new_point = mult_vec_matrix(point, rotation);
 	return (new_point);
 }
