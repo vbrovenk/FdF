@@ -20,7 +20,8 @@ SRC =	main.c\
 		bresenham.c\
 		parsing.c\
 		filling_map.c\
-		choose_key.c
+		choose_key.c\
+		draw_info.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 

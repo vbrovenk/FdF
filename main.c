@@ -71,6 +71,7 @@ void	init_struct(t_fdf *fdf)
 	fdf->angle_x = 0;
 	fdf->angle_y = 0;
 	fdf->angle_z = 0;
+	fdf->flag_help = 1;
 }
 
 // compilation without FLAGS
@@ -87,6 +88,7 @@ int		main(int argc, char const **argv)
 		if (parse_map(fdf, argv[1]) == 0)
 		{
 			system("leaks fdf");
+			ft_putstr("error\n");
 			return (0);
 		}
 		create_map_vectors(fdf);
@@ -96,7 +98,7 @@ int		main(int argc, char const **argv)
 		fdf->img_ptr = mlx_new_image(fdf->mlx_ptr, WIDTH, HEIGHT);
 		fdf->image = (int *)mlx_get_data_addr(fdf->img_ptr,
 					&fdf->bits_per_pixel, &fdf->size_line, &fdf->endian);
-		draw_lines(fdf);
+		draw_info(fdf, 1);
 		mlx_hook(fdf->win_ptr, 2, 5, choose_key, fdf);
 		mlx_hook(fdf->win_ptr, 17, 1L << 17, x_exit, 0);
 		mlx_loop(fdf->mlx_ptr);

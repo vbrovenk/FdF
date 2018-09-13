@@ -49,6 +49,8 @@ void			create_map_vectors(t_fdf *fdf)
 	if (fdf->rows * BETWEEN_VERTEX < HEIGHT)
 		fdf->scale = 1;
 	else
+		fdf->scale = 0.3;
+	if (fdf->rows > 400)
 		fdf->scale = 0.1;
 }
 
@@ -64,7 +66,7 @@ static	int		set_color(char *color_str)
 	if (split[1] != NULL && split[1][0] == '0' && split[1][1] == 'x')
 		result = ft_atoi_base(&split[1][2], 16);
 	else if (split[1] == NULL)
-		result = 0x0000FF;
+		result = 0xFF5D00;
 	else
 		result = ft_atoi_base(split[1], 16);
 	clear_split(split);
@@ -75,17 +77,15 @@ static	void	set_coordinates(t_fdf *fdf, char **split, int i, int j)
 {
 	fdf->map_vec[i][j].x = fdf->start_width;
 	fdf->map_vec[i][j].y = fdf->start_height;
-	fdf->map_vec[i][j].z = ft_atoi(split[j]) * BETWEEN_VERTEX;
+	fdf->map_vec[i][j].z = ft_atoi(split[j]) * BETWEEN_VERTEX / 2;
 	if (fdf->map_vec[i][j].z > 0)
-	{
 		fdf->map_vec[i][j].depth = 1;
-	}
 	else
 		fdf->map_vec[i][j].depth = 0;
 	if (ft_strchr(split[j], ','))
 		fdf->map_vec[i][j].color = set_color(split[j]);
 	else if (fdf->map_vec[i][j].z > 0)
-		fdf->map_vec[i][j].color = 0x0000FF;
+		fdf->map_vec[i][j].color = 0xFF5D00;
 	else
 		fdf->map_vec[i][j].color = 0xFFFFFF;
 }

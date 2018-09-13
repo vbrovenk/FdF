@@ -50,7 +50,7 @@ static	void	part_x(t_fdf *fdf, t_bresenham bresenham, t_vec p1, t_vec p2)
 
 	x = p1.x;
 	y = p1.y;
-	d = -bresenham.lengthX;
+	d = -bresenham.length_x;
 	while (bresenham.length--)
 	{
 		if ((x + WIDTH / 2) < WIDTH - 1 && (y + HEIGHT / 2) < HEIGHT - 1 &&
@@ -61,10 +61,10 @@ static	void	part_x(t_fdf *fdf, t_bresenham bresenham, t_vec p1, t_vec p2)
 											get_coeff(x, p1.x, p2.x));
 		}
 		x += bresenham.dx;
-		d += 2 * bresenham.lengthY;
+		d += 2 * bresenham.length_y;
 		if (d > 0)
 		{
-			d -= 2 * bresenham.lengthX;
+			d -= 2 * bresenham.length_x;
 			y += bresenham.dy;
 		}
 	}
@@ -79,7 +79,7 @@ static	void	part_y(t_fdf *fdf, t_bresenham bresenham, t_vec p1, t_vec p2)
 
 	x = p1.x;
 	y = p1.y;
-	d = -bresenham.lengthY;
+	d = -bresenham.length_y;
 	while (bresenham.length--)
 	{
 		if ((x + WIDTH / 2) < WIDTH - 1 && (y + HEIGHT / 2) < HEIGHT - 1 &&
@@ -90,10 +90,10 @@ static	void	part_y(t_fdf *fdf, t_bresenham bresenham, t_vec p1, t_vec p2)
 												get_coeff(y, p1.y, p2.y));
 		}
 		y += bresenham.dy;
-		d += 2 * bresenham.lengthX;
+		d += 2 * bresenham.length_x;
 		if (d > 0)
 		{
-			d -= 2 * bresenham.lengthY;
+			d -= 2 * bresenham.length_y;
 			x += bresenham.dx;
 		}
 	}
@@ -106,9 +106,9 @@ void			draw_line(t_fdf *fdf, t_vec p1, t_vec p2)
 
 	bresenham.dx = (p2.x - p1.x >= 0 ? 1 : -1);
 	bresenham.dy = (p2.y - p1.y >= 0 ? 1 : -1);
-	bresenham.lengthX = fabs(p2.x - p1.x);
-	bresenham.lengthY = fabs(p2.y - p1.y);
-	bresenham.length = fmax(bresenham.lengthX, bresenham.lengthY);
+	bresenham.length_x = fabs(p2.x - p1.x);
+	bresenham.length_y = fabs(p2.y - p1.y);
+	bresenham.length = fmax(bresenham.length_x, bresenham.length_y);
 	if (bresenham.length == 0)
 	{
 		if ((p1.x + WIDTH / 2) < WIDTH - 1 && (p1.y + HEIGHT / 2) < HEIGHT - 1
@@ -119,7 +119,7 @@ void			draw_line(t_fdf *fdf, t_vec p1, t_vec p2)
 		}
 	}
 	bresenham.length++;
-	if (bresenham.lengthY <= bresenham.lengthX)
+	if (bresenham.length_y <= bresenham.length_x)
 		part_x(fdf, bresenham, p1, p2);
 	else
 		part_y(fdf, bresenham, p1, p2);

@@ -56,7 +56,7 @@ int				parse_map(t_fdf *fdf, const char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	ret = get_next_line(fd, &line);
-	if (ret < 0)
+	if (ret <= 0)
 		return (0);
 	split = ft_strsplit(line, ' ');
 	fdf->columns = count_splits(split);

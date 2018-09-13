@@ -15,9 +15,25 @@
 int		x_exit(void *param)
 {
 	param = NULL;
-	// system("leaks fdf");
+	system("leaks fdf");
 	exit(1);
 	return (0);
+}
+
+static	void	reset(t_fdf *fdf)
+{
+	fdf->translation_x = 0;
+	fdf->translation_y = 0;
+	fdf->translation_z = 1;
+	fdf->angle_x = 0;
+	fdf->angle_y = 0;
+	fdf->angle_z = 0;
+	if (fdf->rows * BETWEEN_VERTEX < HEIGHT)
+		fdf->scale = 1;
+	else
+		fdf->scale = 0.3;
+	if (fdf->rows > 400)
+		fdf->scale = 0.1;
 }
 
 static	void	choose_key_part2(int key, t_fdf *fdf)
@@ -36,17 +52,16 @@ static	void	choose_key_part2(int key, t_fdf *fdf)
 	else if (key == X)
 		fdf->scale += 0.01;
 	else if (key == RESET)
-	{
-		fdf->translation_x = 0;
-		fdf->translation_y = 0;
-		fdf->translation_z = 1;
-		fdf->angle_x = 0;
-		fdf->angle_y = 0;
-		fdf->angle_z = 0;
-	}
+		reset(fdf);
 	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
+	help(fdf);
 	ft_bzero(fdf->image, WIDTH * HEIGHT * sizeof(int));
 	draw_lines(fdf);
+	draw_info(fdf, 0);
+	if (key == HELP)
+		fdf->flag_help = fdf->flag_help == 0 ? 1 : 0;
+	if (fdf->flag_help == 1)
+			help(fdf);
 }
 
 int	choose_key(int key, void *param)

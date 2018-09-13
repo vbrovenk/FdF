@@ -19,13 +19,8 @@
 # include "get_next_line.h"
 # include "mlx.h"
 
-// # define WIDTH 720
-// # define HEIGHT 480
-
-
 # define WIDTH 1280
 # define HEIGHT 720
-
 # define UP_ARROW 126
 # define DOWN_ARROW 125
 # define LEFT_ARROW 123
@@ -41,10 +36,12 @@
 # define UP_Z 116
 # define DOWN_Z 121
 # define RESET 51
-
+# define HELP 44
 # define BETWEEN_VERTEX 40
+# define ALPHA_HEIGHT 22
+# define ALPHA_WIDTH 10
 
-typedef	struct s_vec
+typedef	struct	s_vec
 {
 	float	x;
 	float	y;
@@ -84,18 +81,32 @@ typedef	struct	s_fdf
 	float	angle_y;
 	float	angle_z;
 	float	scale;
+	int		flag_help;
 }				t_fdf;
 
 typedef	struct	s_bresenham
 {
 	int		dx;
 	int		dy;
-	float	lengthX;
-	float	lengthY;
+	float	length_x;
+	float	length_y;
 	int		length;
 }				t_bresenham;
 
-typedef struct s_m3x3
+typedef	struct	s_circle
+{
+	int		x0;
+	int		y0;
+	int		radius;
+	int		err;
+	int		x;
+	int		y;
+	int		dx;
+	int		dy;
+	int		c;
+}				t_circle;
+
+typedef	struct	s_m3x3
 {
 	float	m[3][3];
 }				t_m3x3;
@@ -113,12 +124,14 @@ t_vec	rot_y(t_fdf *fdf, t_vec point);
 t_vec	rot_z(t_fdf *fdf, t_vec point);
 t_vec	scale(t_fdf *fdf, t_vec point);
 void	draw_line(t_fdf *fdf, t_vec p1, t_vec p2);
+void	draw_info(t_fdf *fdf, int	flag_circle);
 int		parse_map(t_fdf *fdf, const char *file_name);
 void	clear_split(char **split);
 void	create_map_vectors(t_fdf *fdf);
 void	fill_map_vectors(t_fdf *fdf, const char *file_name);
 void	draw_lines(t_fdf *fdf);
 int		choose_key(int key, void *param);
+void	help(t_fdf *fdf);
 int		x_exit(void *param);
 
 #endif
