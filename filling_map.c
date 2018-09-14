@@ -46,19 +46,16 @@ void			create_map_vectors(t_fdf *fdf)
 	}
 	fdf->width_map = (fdf->columns - 1) * BETWEEN_VERTEX / 2;
 	fdf->height_map = (fdf->rows - 1) * BETWEEN_VERTEX / 2;
-	if (fdf->rows * BETWEEN_VERTEX < HEIGHT)
-		fdf->scale = 1;
+	if (fdf->rows < fdf->columns)
+		fdf->scale = (float)(WIDTH / (float)(80 * fdf->columns));
 	else
-		fdf->scale = 0.3;
-	if (fdf->rows > 400)
-		fdf->scale = 0.1;
+		fdf->scale = (float)(HEIGHT / (float)(80 * fdf->rows));
 }
 
 static	int		set_color(char *color_str)
 {
 	char	**split;
 	int		i;
-	char	*ready_color;
 	int		result;
 
 	split = ft_strsplit(color_str, ',');

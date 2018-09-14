@@ -42,7 +42,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	@echo "$(PURPLEBOLD)FDF is ready"
 
 %.o: %.c $(INCLUDE)
-	@gcc -c $< -o $@ -I $(LIBFT_INC)
+	@gcc $(CFLAGS) -c $< -o $@ -I $(LIBFT_INC)
 
 $(LIBFT):
 	@make -C libft/

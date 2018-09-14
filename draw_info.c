@@ -12,8 +12,10 @@
 
 #include "fdf.h"
 
-static	t_circle	init_circle(t_circle circle)
+static	t_circle	init_circle(void)
 {
+	t_circle circle;
+
 	circle.x0 = WIDTH / 2;
 	circle.y0 = HEIGHT / 2;
 	circle.radius = 150;
@@ -95,7 +97,7 @@ void				draw_info(t_fdf *fdf, int flag_circle)
 	int			y;
 	t_circle	circle;
 
-	circle = init_circle(circle);
+	circle = init_circle();
 	y = -1;
 	while ((x = -1) && ++y < 70)
 		while (++x < WIDTH)

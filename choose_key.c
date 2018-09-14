@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int		x_exit(void *param)
+int				x_exit(void *param)
 {
 	param = NULL;
 	system("leaks fdf");
@@ -28,12 +28,10 @@ static	void	reset(t_fdf *fdf)
 	fdf->angle_x = 0;
 	fdf->angle_y = 0;
 	fdf->angle_z = 0;
-	if (fdf->rows * BETWEEN_VERTEX < HEIGHT)
-		fdf->scale = 1;
+	if (fdf->rows < fdf->columns)
+		fdf->scale = (float)(WIDTH / (float)(80 * fdf->columns));
 	else
-		fdf->scale = 0.3;
-	if (fdf->rows > 400)
-		fdf->scale = 0.1;
+		fdf->scale = (float)(HEIGHT / (float)(80 * fdf->rows));
 }
 
 static	void	choose_key_part2(int key, t_fdf *fdf)
@@ -61,10 +59,10 @@ static	void	choose_key_part2(int key, t_fdf *fdf)
 	if (key == HELP)
 		fdf->flag_help = fdf->flag_help == 0 ? 1 : 0;
 	if (fdf->flag_help == 1)
-			help(fdf);
+		help(fdf);
 }
 
-int	choose_key(int key, void *param)
+int				choose_key(int key, void *param)
 {
 	t_fdf *fdf;
 

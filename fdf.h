@@ -15,7 +15,7 @@
 
 # include "libft.h"
 # include <fcntl.h>
-#include <math.h>
+# include <math.h>
 # include "get_next_line.h"
 # include "mlx.h"
 
@@ -67,7 +67,6 @@ typedef	struct	s_fdf
 	int		width_map;
 	int		height_map;
 
-	// variables for coord dots
 	int		start_width;
 	int		start_height;
 
@@ -119,19 +118,19 @@ typedef	struct	s_gradient
 	int		blue;
 }				t_gradient;
 
-t_vec	rot_x(t_fdf *fdf, t_vec point);
-t_vec	rot_y(t_fdf *fdf, t_vec point);
-t_vec	rot_z(t_fdf *fdf, t_vec point);
-t_vec	scale(t_fdf *fdf, t_vec point);
-void	draw_line(t_fdf *fdf, t_vec p1, t_vec p2);
-void	draw_info(t_fdf *fdf, int	flag_circle);
-int		parse_map(t_fdf *fdf, const char *file_name);
-void	clear_split(char **split);
-void	create_map_vectors(t_fdf *fdf);
-void	fill_map_vectors(t_fdf *fdf, const char *file_name);
-void	draw_lines(t_fdf *fdf);
-int		choose_key(int key, void *param);
-void	help(t_fdf *fdf);
-int		x_exit(void *param);
+t_vec			rot_x(t_fdf *fdf, t_vec point);
+t_vec			rot_y(t_fdf *fdf, t_vec point);
+t_vec			rot_z(t_fdf *fdf, t_vec point);
+t_vec			scale(t_fdf *fdf, t_vec point);
+void			draw_line(t_fdf *fdf, t_vec p1, t_vec p2);
+void			draw_info(t_fdf *fdf, int	flag_circle);
+int				parse_map(t_fdf *fdf, const char *file_name);
+void			clear_split(char **split);
+void			create_map_vectors(t_fdf *fdf);
+void			fill_map_vectors(t_fdf *fdf, const char *file_name);
+void			draw_lines(t_fdf *fdf);
+int				choose_key(int key, void *param);
+void			help(t_fdf *fdf);
+int				x_exit(void *param);
 
 #endif

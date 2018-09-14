@@ -74,7 +74,6 @@ void	init_struct(t_fdf *fdf)
 	fdf->flag_help = 1;
 }
 
-// compilation without FLAGS
 int		main(int argc, char const **argv)
 {
 	t_fdf	*fdf;
@@ -86,11 +85,7 @@ int		main(int argc, char const **argv)
 		fdf = (t_fdf*)malloc(sizeof(t_fdf));
 		init_struct(fdf);
 		if (parse_map(fdf, argv[1]) == 0)
-		{
-			system("leaks fdf");
-			ft_putstr("error\n");
 			return (0);
-		}
 		create_map_vectors(fdf);
 		fill_map_vectors(fdf, argv[1]);
 		fdf->mlx_ptr = mlx_init();
