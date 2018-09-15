@@ -12,14 +12,14 @@
 
 #include "fdf.h"
 
-float			get_coeff(int middle, int left, int right)
+static	float	get_coeff(int middle, int left, int right)
 {
 	if (right == left)
 		return (0);
 	return ((float)(middle - left) / (right - left));
 }
 
-int				get_gradient(int color1, int color2, float coeff)
+static	int		get_gradient(int color1, int color2, float coeff)
 {
 	t_gradient	grad1;
 	t_gradient	grad2;

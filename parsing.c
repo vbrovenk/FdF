@@ -42,7 +42,6 @@ static	void	ft_error(t_fdf *fdf, char **split, char *line)
 		clear_split(split);
 		ft_strdel(&line);
 		ft_putstr("Invalid map\n");
-		system("leaks fdf");
 		exit(1);
 	}
 }

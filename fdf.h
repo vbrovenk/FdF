@@ -55,24 +55,18 @@ typedef	struct	s_fdf
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
-
 	int		*image;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
-
 	t_vec	**map_vec;
 	t_vec	**change_map;
-
 	int		width_map;
 	int		height_map;
-
 	int		start_width;
 	int		start_height;
-
 	int		rows;
 	int		columns;
-
 	int		translation_x;
 	int		translation_y;
 	float	translation_z;

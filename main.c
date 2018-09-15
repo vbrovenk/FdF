@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "fdf.h"
 
-void	rotate(t_fdf *fdf)
+void			rotate(t_fdf *fdf)
 {
 	int i;
 	int j;
@@ -34,7 +33,7 @@ void	rotate(t_fdf *fdf)
 	}
 }
 
-void	draw_lines(t_fdf *fdf)
+void			draw_lines(t_fdf *fdf)
 {
 	int i;
 	int j;
@@ -57,7 +56,7 @@ void	draw_lines(t_fdf *fdf)
 	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->img_ptr, 0, 0);
 }
 
-void	init_struct(t_fdf *fdf)
+static	void	init_struct(t_fdf *fdf)
 {
 	fdf->mlx_ptr = NULL;
 	fdf->win_ptr = NULL;
@@ -74,7 +73,22 @@ void	init_struct(t_fdf *fdf)
 	fdf->flag_help = 1;
 }
 
-int		main(int argc, char const **argv)
+static	int		error(t_fdf *fdf, char const *argv)
+{
+	if (parse_map(fdf, argv) == 0)
+	{
+		ft_putstr("error\n");
+		return (1);
+	}
+	if (fdf->rows == 0 || fdf->columns == 0)
+	{
+		ft_putstr("error\n");
+		return (1);
+	}
+	return (0);
+}
+
+int				main(int argc, char const **argv)
 {
 	t_fdf	*fdf;
 
@@ -84,8 +98,8 @@ int		main(int argc, char const **argv)
 	{
 		fdf = (t_fdf*)malloc(sizeof(t_fdf));
 		init_struct(fdf);
-		if (parse_map(fdf, argv[1]) == 0)
-			return (0);
+		if (error(fdf, argv[1]) == 1)
+			return (1);
 		create_map_vectors(fdf);
 		fill_map_vectors(fdf, argv[1]);
 		fdf->mlx_ptr = mlx_init();

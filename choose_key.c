@@ -15,7 +15,6 @@
 int				x_exit(void *param)
 {
 	param = NULL;
-	system("leaks fdf");
 	exit(1);
 	return (0);
 }

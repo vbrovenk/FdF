@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void			fill_change_vectors(t_fdf *fdf)
+static	void	fill_change_vectors(t_fdf *fdf)
 {
 	int i;
 	int j;
