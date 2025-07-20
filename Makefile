@@ -14,7 +14,10 @@ NAME = fdf
 INCLUDE = fdf.h
 LIBFT_INC = ./libft/includes/
 LIBFT = libft/libft.a
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+
+MLX_FLAGS = -L minilibx/mlx_macos -lmlx -framework OpenGL -framework AppKit
+MLX_INC = minilibx
+
 SRC =	main.c\
 		rotatin.c\
 		bresenham.c\
@@ -23,7 +26,7 @@ SRC =	main.c\
 		choose_key.c\
 		draw_info.c
 OBJ = $(SRC:.c=.o)
-CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror
 
 OFF=\033[0m
 RED=\033[31m
@@ -37,15 +40,18 @@ PURPLEBOLD=\033[1;35m
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) minilibx_MacOS
 	@gcc $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(PURPLEBOLD)FDF is ready"
 
 %.o: %.c $(INCLUDE)
-	@gcc $(CFLAGS) -c $< -o $@ -I $(LIBFT_INC)
+	@gcc $(CFLAGS) -c $< -o $@ -I $(LIBFT_INC) -I $(MLX_INC)
 
 $(LIBFT):
 	@make -C libft/
+
+minilibx_MacOS:
+	@make -C minilibx/mlx_macos/
 
 clean:
 	@make clean -C libft/
@@ -53,6 +59,7 @@ clean:
 
 fclean: clean
 	@make fclean -C libft/
+	@make clean -C minilibx/mlx_macos
 	@rm -rf $(NAME)
 
 re: fclean all
